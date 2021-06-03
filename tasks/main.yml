@@ -1,0 +1,35 @@
+---
+- name: TERRAFORM | Create temporary directory
+  tempfile:
+    prefix: "ansibleterraform"
+    state: directory
+  register: tmpdir
+  changed_when: false
+
+- name: TERRAFORM | Get user home path
+  debug: var=lookup('env','HOME')
+  become: true
+  become_user: "{{ tfswitch_user }}"
+
+- name: TERRAFORM | Download tfswitch installer
+  get_url:
+    url: "{{ tfswitch_download_url }}"
+    dest: "{{ tmpdir.path }}"
+    mode: 0555
+    owner: "{{ tfswitch_user }}"
+  become: true
+  changed_when: false
+
+- name: TERRAFORM | Install tfswitch
+  command:
+    argv:
+      - "{{ tmpdir.path }}/install.sh"
+      - "-b"
+      - "{{ lookup('env','HOME') }}/.local/bin/"
+  changed_when: false
+
+- name: TERRAFORM | Remove temporary directory
+  file:
+    path: "{{ tmpdir.path }}"
+    state: absent
+  changed_when: false

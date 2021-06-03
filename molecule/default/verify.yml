@@ -1,0 +1,16 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: get tfswitch binary
+      shell: '[ -x "$(command -v tfswitch)" ] && echo "True" || echo "False"'
+      register: tfswitch_is_installed_command
+      changed_when: false
+
+    - name: Service is enabled and running
+      assert:
+        that:
+          - tfswitch_is_installed_command.stdout == "True"

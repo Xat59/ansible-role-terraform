@@ -1,0 +1,4 @@
+---
+_tfswitch_base_url: https://raw.githubusercontent.com
+_tfswitch_path_url: "/warrensbox/terraform-switcher/release/install.sh"
+tfswitch_download_url: "{{ _tfswitch_base_url }}{{ _tfswitch_path_url }}"
