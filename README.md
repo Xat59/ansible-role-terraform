@@ -15,7 +15,13 @@ Ansible role that installs [`tfswitch` tool](https://tfswitch.warrensbox.com) in
   roles:
     - role: xat.terraform
       tfswitch_user: xat
+      terraform_versions:
+        - latest
+        - 0.14
+        - 0.13
 ```
+
+Then, you can use `tfswitch -b ~/.local/bin/terraform` to install or switch between terraform versions.
 
 ## Versioning
 

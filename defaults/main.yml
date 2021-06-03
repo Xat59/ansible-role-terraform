@@ -1,3 +1,7 @@
 ---
 # define the user that will have tfswitch
 tfswitch_user: root
+
+# define the versions of terraform you want to install
+terraform_versions:
+  - latest

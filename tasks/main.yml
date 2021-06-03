@@ -28,6 +28,28 @@
       - "{{ lookup('env','HOME') }}/.local/bin/"
   changed_when: false
 
+- name: TERRAFORM | Install latest terraform version
+  command:
+    argv:
+      - "tfswitch"
+      - "-b"
+      - "{{ lookup('env','HOME') }}/.local/bin/terraform"
+      - "-u"
+  when:
+    - "'latest' in {{ terraform_versions }}"
+
+- name: TERRAFORM | Install specific terraform versions
+  command:
+    argv:
+      - "tfswitch"
+      - "-b"
+      - "{{ lookup('env','HOME') }}/.local/bin/terraform"
+      - "--latest-stable"
+      - "{{ item }}"
+  with_items: "{{ terraform_versions }}"
+  when:
+    - item != "latest"
+
 - name: TERRAFORM | Remove temporary directory
   file:
     path: "{{ tmpdir.path }}"
