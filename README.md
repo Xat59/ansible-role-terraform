@@ -1,6 +1,6 @@
 # terraform
 
-![Build Status](https://api.travis-ci.com/Xat59/ansible-role-terraform.svg) ![Apache 2.0 Licence](https://img.shields.io/hexpm/l/plug.svg) ![Ansible](https://img.shields.io/badge/ansible-2.10.x-green.svg)
+[![Build Status](https://api.travis-ci.com/Xat59/ansible-role-terraform.svg)](https://travis-ci.com/github/Xat59/ansible-role-terraform) ![Apache 2.0 Licence](https://img.shields.io/hexpm/l/plug.svg) ![Ansible](https://img.shields.io/badge/ansible-2.10.x-green.svg)
 
 Ansible role that installs [`tfswitch` tool](https://tfswitch.warrensbox.com) in order to get multiple versions of Hashicorp `terraform` binary installed.
 
