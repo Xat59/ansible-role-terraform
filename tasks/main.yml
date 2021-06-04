@@ -50,6 +50,7 @@
       - "-u"
   when:
     - "'latest' in {{ terraform_versions }}"
+  changed_when: false
 
 - name: TERRAFORM | Install specific terraform versions
   command:
@@ -62,6 +63,7 @@
   with_items: "{{ terraform_versions }}"
   when:
     - item != "latest"
+  changed_when: false
 
 - name: TERRAFORM | Install terragrunt with tgswitch
   include_tasks: install-terragrunt.yml
