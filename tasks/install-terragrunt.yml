@@ -16,24 +16,11 @@
       - "{{ lookup('env','HOME') }}/.local/bin/"
   changed_when: false
 
-- name: TERRAFORM | Install latest terragrunt version
-  command:
-    argv:
-      - "{{ lookup('env','HOME') }}/.local/bin/tgswitch"
-      - "-b"
-      - "{{ lookup('env','HOME') }}/.local/bin/terragrunt"
-      - "-u"
-  when:
-    - "'latest' in {{ terragrunt_versions }}"
-
 - name: TERRAFORM | Install specific terragrunt versions
   command:
     argv:
       - "{{ lookup('env','HOME') }}/.local/bin/tgswitch"
       - "-b"
       - "{{ lookup('env','HOME') }}/.local/bin/terragrunt"
-      - "--latest-stable"
       - "{{ item }}"
   with_items: "{{ terragrunt_versions }}"
-  when:
-    - item != "latest"
