@@ -1,7 +1,14 @@
 ---
-# define the user that will have tfswitch
+# define the user that will have tfswitch, tgswitch, terraform and terragrunt
 tfswitch_user: root
 
 # define the versions of terraform you want to install
 terraform_versions:
+  - latest
+
+# weither or not install terragrunt and tgswitch packages
+install_terragrunt: true
+
+# define the versions of terragrunt you want to install
+terragrunt_versions:
   - latest

@@ -31,5 +31,8 @@ galaxy_info:
 
   galaxy_tags:
     - terraform
+    - terragrunt
+    - tfswitch
+    - tgswitch
     - hashicorp
     - devops
