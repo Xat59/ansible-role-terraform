@@ -1,15 +1,28 @@
 ---
+- name: TERRAFORM | Install curl
+  apt:
+    name: curl
+    state: present
+    update_cache: true
+  become: true
+  when:
+    - ansible_os_family == "Debian"
+
+- name: TERRAFORM | Install curl
+  yum:
+    name: curl
+    state: present
+    update_cache: true
+  become: true
+  when:
+    - ansible_os_family == "RedHat"
+
 - name: TERRAFORM | Create temporary directory
   tempfile:
     prefix: "ansibleterraform"
     state: directory
   register: tmpdir
   changed_when: false
-
-- name: TERRAFORM | Get user home path
-  debug: var=lookup('env','HOME')
-  become: true
-  become_user: "{{ tfswitch_user }}"
 
 - name: TERRAFORM | Download tfswitch installer
   get_url:
