@@ -24,3 +24,4 @@
       - "{{ lookup('env','HOME') }}/.local/bin/terragrunt"
       - "{{ item }}"
   with_items: "{{ terragrunt_versions }}"
+  changed_when: false
