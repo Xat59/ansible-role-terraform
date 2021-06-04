@@ -1,0 +1,27 @@
+---
+- name: TERRAFORM | Download tgswitch installer
+  get_url:
+    url: "{{ tgswitch_download_url }}"
+    dest: "{{ tmpdir.path }}"
+    mode: 0555
+    owner: "{{ tfswitch_user }}"
+  become: true
+  changed_when: false
+
+- name: TERRAFORM | Install tgswitch
+  command:
+    argv:
+      - "{{ tmpdir.path }}/install.sh"
+      - "-b"
+      - "{{ lookup('env','HOME') }}/.local/bin/"
+  changed_when: false
+
+- name: TERRAFORM | Install specific terragrunt versions
+  command:
+    argv:
+      - "{{ lookup('env','HOME') }}/.local/bin/tgswitch"
+      - "-b"
+      - "{{ lookup('env','HOME') }}/.local/bin/terragrunt"
+      - "{{ item }}"
+  with_items: "{{ terragrunt_versions }}"
+  changed_when: false

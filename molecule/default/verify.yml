@@ -6,11 +6,33 @@
   gather_facts: false
   tasks:
     - name: get tfswitch binary
-      shell: '[ -x "$(command -v tfswitch)" ] && echo "True" || echo "False"'
+      shell: |
+        test -x "$(command -v {{ lookup('env','HOME') }}/.local/bin/tfswitch)" && echo "True" || echo "False"
       register: tfswitch_is_installed_command
+      changed_when: false
+
+    - name: get tgswitch binary
+      shell:  |
+        test -x "$(command -v {{ lookup('env','HOME') }}/.local/bin/tgswitch)" && echo "True" || echo "False"
+      register: tgswitch_is_installed_command
+      changed_when: false
+
+    - name: get terraform binary
+      shell: |
+        test -x "$(command -v {{ lookup('env','HOME') }}/.local/bin/terraform)" && echo "True" || echo "False"
+      register: terraform_is_installed_command
+      changed_when: false
+
+    - name: get terragrunt binary
+      shell: |
+        test -x "$(command -v {{ lookup('env','HOME') }}/.local/bin/terragrunt)" && echo "True" || echo "False"
+      register: terragrunt_is_installed_command
       changed_when: false
 
     - name: Service is enabled and running
       assert:
         that:
           - tfswitch_is_installed_command.stdout == "True"
+          - tgswitch_is_installed_command.stdout == "True"
+          - terraform_is_installed_command.stdout == "True"
+          - terragrunt_is_installed_command.stdout == "True"

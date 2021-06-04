@@ -44,17 +44,18 @@
 - name: TERRAFORM | Install latest terraform version
   command:
     argv:
-      - "tfswitch"
+      - "{{ lookup('env','HOME') }}/.local/bin/tfswitch"
       - "-b"
       - "{{ lookup('env','HOME') }}/.local/bin/terraform"
       - "-u"
   when:
     - "'latest' in {{ terraform_versions }}"
+  changed_when: false
 
 - name: TERRAFORM | Install specific terraform versions
   command:
     argv:
-      - "tfswitch"
+      - "{{ lookup('env','HOME') }}/.local/bin/tfswitch"
       - "-b"
       - "{{ lookup('env','HOME') }}/.local/bin/terraform"
       - "--latest-stable"
@@ -62,6 +63,11 @@
   with_items: "{{ terraform_versions }}"
   when:
     - item != "latest"
+  changed_when: false
+
+- name: TERRAFORM | Install terragrunt with tgswitch
+  include_tasks: install-terragrunt.yml
+  when: install_terragrunt
 
 - name: TERRAFORM | Remove temporary directory
   file:
