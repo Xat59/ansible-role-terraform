@@ -21,7 +21,7 @@
     argv:
       - "{{ lookup('env','HOME') }}/.local/bin/tgswitch"
       - "-b"
-      - "{{ lookup('env','HOME') }}/.local/bin/terraform"
+      - "{{ lookup('env','HOME') }}/.local/bin/terragrunt"
       - "-u"
   when:
     - "'latest' in {{ terragrunt_versions }}"
@@ -31,7 +31,7 @@
     argv:
       - "{{ lookup('env','HOME') }}/.local/bin/tgswitch"
       - "-b"
-      - "{{ lookup('env','HOME') }}/.local/bin/terraform"
+      - "{{ lookup('env','HOME') }}/.local/bin/terragrunt"
       - "--latest-stable"
       - "{{ item }}"
   with_items: "{{ terragrunt_versions }}"
